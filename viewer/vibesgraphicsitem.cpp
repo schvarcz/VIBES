@@ -10,9 +10,9 @@
 #include <QPainterPath>
 
 
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
+#include <QJsonObject.h>
+#include <QJsonArray.h>
+#include <QJsonValue.h>
 
 // The only instance of VibesDefaults
 VibesDefaults VibesDefaults::_instance;

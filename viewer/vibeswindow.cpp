@@ -1,38 +1,18 @@
 #include "vibeswindow.h"
 #include "ui_vibeswindow.h"
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
-#include "figure2d.h"
-
-#include "vibesscene2d.h"
-#include "vibesgraphicsitem.h"
-
-#include <QFileDialog>
-
-#include <QTimer>
-#include <QtCore>
-
-#include "vibestreemodel.h"
 
 VibesWindow::VibesWindow(bool showFileOpenDlg, QWidget *parent) :
-QMainWindow(parent),
-ui(new Ui::VibesWindow)
+    QMainWindow(parent),
+    ui(new Ui::VibesWindow)
 {
     ui->setupUi(this);
     ui->treeView->setModel(new VibesTreeModel(figures, this));
 
     // When its name is double clicked in the list, the corresponding figure is brought to front
-    connect(ui->treeView, &QTreeView::doubleClicked,
-            [](const QModelIndex& mi){Figure2D* fig = static_cast<Figure2D*>( mi.internalPointer() );
-                                      if (fig) { fig->showNormal();
-                                                 fig->activateWindow();
-                                                 fig->raise(); }
-                                     } );
+    connect(ui->treeView, SIGNAL(doubleClicked(QModelIndex)),this,SLOT(showSelectedFigure(QModelIndex)));
 
-    /// \todo Put platform dependent code here for named pipe creation and opening
-    if (showFileOpenDlg)
+            /// \todo Put platform dependent code here for named pipe creation and opening
+            if (showFileOpenDlg)
     {
         file.setFileName(QFileDialog::getOpenFileName());
     }
@@ -168,13 +148,13 @@ VibesWindow::processMessage(const QByteArray &msg_data)
         // Remove from the list of figures an delete
         delete fig;
     }
-        // Create a new figure
+    // Create a new figure
     else if (action == "new")
     {
         // Create a new figure (previous with the same name will be destroyed)
         fig = newFigure(fig_name);
     }
-        // Clear the contents of a figure or a group
+    // Clear the contents of a figure or a group
     else if (action == "clear")
     {
         // Figure has to exist
@@ -196,7 +176,7 @@ VibesWindow::processMessage(const QByteArray &msg_data)
         }
         /// \todo Remove named objects references if needed
     }
-        // Deletes a graphics item
+    // Deletes a graphics item
     else if (action == "delete")
     {
         // Figure has to exist
@@ -212,7 +192,7 @@ VibesWindow::processMessage(const QByteArray &msg_data)
         // ...delete it
         delete item;
     }
-        // Export to a graphical file
+    // Export to a graphical file
     else if (action == "export")
     {
         // Figure has to exist
@@ -221,7 +201,7 @@ VibesWindow::processMessage(const QByteArray &msg_data)
         // Exports to given filename (if not defined, shows a save dialog)
         fig->exportGraphics(msg["file"].toString());
     }
-        // Draw a shape
+    // Draw a shape
     else if (action == "draw")
     {
         if (!fig) // Create a new figure if it does not exist
@@ -234,7 +214,7 @@ VibesWindow::processMessage(const QByteArray &msg_data)
             fig->scene()->addJsonShapeItem(shape);
         }
     }
-        // Set properties
+    // Set properties
     else if (action == "set")
     {
         // Figure has to exist
@@ -307,7 +287,7 @@ VibesWindow::processMessage(const QByteArray &msg_data)
             }
         }
     }
-        // Unknown action
+    // Unknown action
     else
     {
         return false;
@@ -346,13 +326,13 @@ VibesWindow::readFile()
         {
             continue;
         }
-            // Empty new line ("\n\n") is message separator
+        // Empty new line ("\n\n") is message separator
         else if (line[0] == '\n' && message.endsWith('\n'))
         {
             processMessage(message);
             message.clear();
         }
-            // Add this line to the current message
+        // Add this line to the current message
         else
         {
             message.append(line);
@@ -362,3 +342,15 @@ VibesWindow::readFile()
     // Program new file-read try in 50 ms.
     QTimer::singleShot(50, this, SLOT(readFile()));
 }
+
+void VibesWindow::showSelectedFigure(const QModelIndex& mi)
+{
+    Figure2D* fig = static_cast<Figure2D*>( mi.internalPointer() );
+    if (fig)
+    {
+        fig->showNormal();
+        fig->activateWindow();
+        fig->raise();
+    }
+}
+

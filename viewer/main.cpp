@@ -29,7 +29,6 @@ int main(int argc, char *argv[])
 
     // Trying to launch the app when it is already launched will make it pop
     QObject::connect(m_localServer, SIGNAL(newConnection()), &w, SLOT(showNormal()));
-    QObject::connect(m_localServer, &QLocalServer::newConnection, &w, &VibesWindow::activateWindow);
 
     // Enter main event loop
     return a.exec();

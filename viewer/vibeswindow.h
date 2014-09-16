@@ -7,6 +7,22 @@
 #include <QFile>
 #include <QPen>
 #include <QBrush>
+#include <QJsonDocument.h>
+#include <QJsonObject.h>
+#include <QJsonArray.h>
+#include <QJsonValue.h>
+#include <QJsonParseError.h>
+#include "figure2d.h"
+
+#include "vibesscene2d.h"
+#include "vibesgraphicsitem.h"
+
+#include <QFileDialog>
+
+#include <QTimer>
+#include <QtCore>
+
+#include "vibestreemodel.h"
 
 class Figure2D;
 
@@ -31,6 +47,7 @@ public slots:
 
 private slots:
     void removeFigureFromList(QObject *fig);
+    void showSelectedFigure(const QModelIndex &mi);
 
 private:
     Ui::VibesWindow *ui;

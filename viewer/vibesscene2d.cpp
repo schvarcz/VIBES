@@ -1,8 +1,8 @@
 #include "vibesscene2d.h"
 
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QJsonValue>
+#include <QJsonObject.h>
+#include <QJsonArray.h>
+#include <QJsonValue.h>
 
 #include <QtCore>
 

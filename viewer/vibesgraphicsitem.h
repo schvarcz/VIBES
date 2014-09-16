@@ -2,8 +2,8 @@
 #define VIBESGRAPHICSITEM_H
 
 #include <QGraphicsItem>
-#include <QJsonObject>
-#include <QJsonValue>
+#include <QJsonObject.h>
+#include <QJsonValue.h>
 
 //#include <QBitArray>
 #include "vibesscene2d.h"

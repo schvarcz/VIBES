@@ -199,7 +199,7 @@ void Figure2D::wheelEvent(QWheelEvent *event)
         setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
         // Scales the view to zoom according to mouse wheel
-        double s = qPow(2.0, 0.04*event->angleDelta().y()/8.0);
+        double s = qPow(2.0, 0.04*event->delta()/8.0);
 
         double sx = s;
         double sy = s;
