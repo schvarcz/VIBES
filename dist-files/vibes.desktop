@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=VIBes
+Comment=VIBes is a visualization system that aims at providing people working with interval methods a way to display results
+Exec=/usr/bin/vibes/Vibes-viewer 
+Icon=/usr/share/vibes/icons/vibes_512.svg
+Terminal=false
+Type=Application
+Categories=Robotics;Interval;Visualization;
+MimeType=x-scheme-handler/vibes;

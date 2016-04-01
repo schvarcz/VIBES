@@ -26,3 +26,6 @@ contains(CONFIG, static): {
            DEFINES += _USE_qsvg
        }
    }
+
+RESOURCES += \
+    icons.qrc

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>VIBes</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/usr/share/vibes/icons/vibes_512.svg</normaloff>:/usr/share/vibes/icons/vibes_512.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -30,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>166</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -54,7 +58,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionExportGraphics</sender>

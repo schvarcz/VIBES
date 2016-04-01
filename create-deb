@@ -1,0 +1,20 @@
+#!/bin/bash
+
+sudo rm dist/ -R
+
+mkdir -p dist/vibes/DEBIAN
+mkdir -p dist/vibes/usr/share/applications/
+mkdir -p dist/vibes/usr/share/vibes/
+mkdir -p dist/vibes/usr/bin/vibes/
+
+cp dist-files/vibes.desktop dist/vibes/usr/share/applications/
+cp viewer/icons dist/vibes/usr/share/vibes/ -R
+cp build-viewer-Desktop-Debug/* dist/vibes/usr/bin/vibes/ -R
+cp dist-files/control dist/vibes/DEBIAN
+
+
+sudo chown root:root dist/vibes/* -R
+
+cd dist
+dpkg-deb --build vibes
+cd ..

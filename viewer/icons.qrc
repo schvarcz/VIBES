@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/usr/share/vibes">
+        <file>icons/vibes_512.png</file>
+        <file>icons/vibes_512.svg</file>
+    </qresource>
+</RCC>
