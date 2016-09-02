@@ -29,3 +29,6 @@ contains(CONFIG, static): {
 
 RESOURCES += \
     icons.qrc
+
+target.path = $$PREFIX/bin
+INSTALLS += target
